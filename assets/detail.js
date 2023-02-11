@@ -1,8 +1,21 @@
 const BASE_URL ="http://localhost:9000";
-document.querySelector("#register").addEventListener("click",()=>{
-    let name = document.querySelector("#name").value;
+
+let name = document.querySelector("#name").value;
     let surname = document.querySelector("#surname").value;
     let password = document.querySelector("#password").value;
+
+    fetch(`${BASE_URL}/get-data`)
+    .then((res)=>res.json())
+    .then((json)=>{
+        json.data.map((item)=>{
+        document.querySelector("#name").value = item.name;
+        document.querySelector("#surname").value = item.surname;
+        document.querySelector("#password").value = item.password; 
+        })              
+})
+
+
+document.querySelector("#update").addEventListener("click", ()=>{
     let data = {
         name,
         surname,
@@ -43,25 +56,3 @@ document.querySelector("#register").addEventListener("click",()=>{
             })
 
 });
-
-
-fetch(`${BASE_URL}/get-data`)
-        .then((res)=>res.json())
-        .then((json)=>{
-            json.data.map(item=>(
-                document.querySelector(".customers").innerHTML += `
-            <tr>
-            <td>${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.surname}</td>
-            <td>${item.password}</td>
-          </tr> `
-
-            ))
-                   
- })
-
-
-
-
-
