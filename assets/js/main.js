@@ -4,11 +4,13 @@ document.querySelector("#register").addEventListener("click",()=>{
     let surname = document.querySelector("#surname").value;
     let password = document.querySelector("#password").value;
     let data = {
+        id: Date.now(),
         name,
         surname,
         password,
     }
-    fetch(`${BASE_URL}/create-data`,{
+    // bu create di axi
+    fetch(`${BASE_URL}/create-data`,{      
         method: "Post",
         headers: {
             "Content-Type": "application/json",
